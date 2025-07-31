@@ -4,7 +4,7 @@ require_relative '../domain/order/order_item'
 require_relative '../domain/order/price'
 require_relative '../config/database'
 
-class MemoryOrderRepository < OrderDomain::OrderRepository
+class PostgresOrderRepository < OrderDomain::OrderRepository
   def save(order)
     DB.transaction do
       order_table = DB[:orders]

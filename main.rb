@@ -1,8 +1,8 @@
 require_relative './application/place_order'
-require_relative './infrastructure/memory_order_repository'
+require_relative './infrastructure/postgres_order_repository'
 
 # Example usage
-order_repository = MemoryOrderRepository.new
+order_repository = PostgresOrderRepository.new
 place_order = Application::PlaceOrder.new(order_repository)
 
 # Sample order data
