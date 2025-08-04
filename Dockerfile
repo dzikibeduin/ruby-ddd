@@ -1,9 +1,12 @@
-FROM ruby:3.3
+FROM ruby:3.2
 
 WORKDIR /app
 
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
 COPY . .
 
-RUN gem install bundler && bundle install
+EXPOSE 4567
 
-CMD ["ruby", "main.rb"]
+CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "--port", "4567"]

@@ -25,3 +25,21 @@ post '/orders' do
     end
   }.to_json
 end
+
+get '/orders/' do
+  content_type :json
+  orders = repo.all.map do |order|
+    {
+      order_id: order.id,
+      total_price: order.total_price,
+      items: order.items.map do |item|
+        {
+          product_id: item.product_id,
+          quantity: item.quantity,
+          price: item.price.amount
+        }
+      end
+    }
+  end
+  orders.to_json
+end
