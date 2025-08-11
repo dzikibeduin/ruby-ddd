@@ -18,6 +18,9 @@ services:
       - db
     ports:
       - '4567:4567'
+    volumes:
+      - .:/app
+      - /app/vendor/bundle
     environment:
       RACK_ENV: development
       DATABASE_URL: postgres://ruby_user:ruby_pass@db:5432/ruby_app_dev

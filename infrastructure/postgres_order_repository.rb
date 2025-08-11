@@ -7,7 +7,7 @@ require_relative '../config/database'
 class PostgresOrderRepository < OrderDomain::OrderRepository
   def save(order)
     DB.transaction do
-      order_table = DB[:orders]
+      orders_table = DB[:orders]
       items_table = DB[:order_items]
 
       orders_table.insert(external_id: order.id)
@@ -24,7 +24,7 @@ class PostgresOrderRepository < OrderDomain::OrderRepository
   end
 
   def find_by_id(id)
-    order_table = DB[:orders]
+    orders_table = DB[:orders]
     items_table = DB[:order_items]
 
     order_row = orders_table.where(external_id: id).first
@@ -52,6 +52,7 @@ class PostgresOrderRepository < OrderDomain::OrderRepository
       items_table.where(order_id: order_row[:id]).each do |item_row|
         order.add_item(OrderDomain::OrderItem.new(item_row[:product_id], item_row[:quantity], item_row[:price]))
       end
+      order
     end
   end
 end

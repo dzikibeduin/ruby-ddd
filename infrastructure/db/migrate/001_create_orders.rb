@@ -2,7 +2,6 @@ Sequel.migration do
   change do
     create_table(:orders) do
       primary_key :id
-      String external_id, unique: true, null: false
     end
 
     create_table(:order_items) do

@@ -3,8 +3,8 @@ require_relative './config/database'
 
 namespace :db do
   task :migrate do
-    Sequel.extenstion :migration
-    Sequel::Migrator.run(DB, 'infrastucture/db/migrate')
+    Sequel.extension :migration
+    Sequel::Migrator.run(DB, 'infrastructure/db/migrate')
     puts "Database migration completed successfully."
   end
 end
