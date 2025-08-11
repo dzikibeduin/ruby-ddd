@@ -2,10 +2,12 @@ require 'sinatra'
 require 'json'
 require_relative '../application/place_order'
 require_relative '../infrastructure/postgres_order_repository'
+# require_relative '../infrastructure/mongo_order_repository'
 
 set :port, 4567
 
 repo = PostgresOrderRepository.new
+# repo = MongoOrderRepository.new
 use_case = Application::PlaceOrder.new(repo)
 
 post '/orders' do

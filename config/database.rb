@@ -6,7 +6,7 @@ WAIT_TIME = 2 # sekundy
 
 MAX_ATTEMPTS.times do |i|
   begin
-    DB = Sequel.connect('postgres://postgres:postgres@db:5432/ruby_app_dev')
+    DB = Sequel.connect('postgres://ruby_user:ruby_pass@db:5432/ruby_app_dev')
     puts "✅ Połączono z bazą danych"
     break
   rescue Sequel::DatabaseConnectionError => e

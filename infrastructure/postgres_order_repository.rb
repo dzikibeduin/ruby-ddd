@@ -42,4 +42,16 @@ class PostgresOrderRepository < OrderDomain::OrderRepository
 
     order
   end
+
+  def all
+    orders_table = DB[:orders]
+    items_table = DB[:order_items]
+
+    orders_table.all.map do |order_row|
+      order = OrderDomain::Order.new(order_row[:external_id])
+      items_table.where(order_id: order_row[:id]).each do |item_row|
+        order.add_item(OrderDomain::OrderItem.new(item_row[:product_id], item_row[:quantity], item_row[:price]))
+      end
+    end
+  end
 end
